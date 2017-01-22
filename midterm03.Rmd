@@ -14,23 +14,60 @@ library(ggplot2)
 
 ###01. 散佈圖
 ```{R message=FALSE, warning=FALSE}
-ggplot(diamonds, aes(x=carat, y=price))+geom_point(size=0.5, colour="blue")+ggtitle("鑽石克拉數-價格散佈圖")+xlab("克拉數")+ylab("價格")+geom_smooth(method="lm", se=FALSE)
+ggplot(diamonds, aes(x=carat, y=price))+
+  geom_point(size=0.5, colour="blue")+
+  ggtitle("鑽石克拉數-價格散佈圖")+
+  xlab("克拉數")+ylab("價格")+
+  geom_smooth(method="lm", se=FALSE)
 ```
 
 ###02. 線圖
 
 ```{R message=FALSE, warning=FALSE}
-ggplot(economics, aes(x=date, y=pop))+geom_line(colour="red")+ggtitle("Population Change during Time")+xlab("Time")+ylab("Population")
+ggplot(economics, aes(x=date, y=pop))+
+  geom_line(colour="red")+
+  ggtitle("Population Change during Time")+
+  xlab("Time")+ylab("Population")
 ```
 
 ###03. 直方圖
 ```{R message=FALSE, warning=FALSE}
-ggplot(diamonds, aes(x=price))+geom_histogram(bins=1000) +ggtitle("鑽石價格直方圖") +xlab("價格")+ylab("frequency")
+ggplot(diamonds, aes(x=price))+
+  geom_histogram(bins=1000) +
+  ggtitle("鑽石價格直方圖") +
+  xlab("價格")+ylab("frequency")
 ```
 
 ###04. 盒鬚圖
 ```{R message=FALSE, warning=FALSE}
-ggplot(iris, aes(x=Species, y=Petal.Length))+geom_boxplot()+ggtitle("各品種鳶尾花花瓣長度盒鬚圖")+xlab("鳶尾花品種")+ylab("花瓣長度")
+ggplot(iris, aes(x=Species, y=Petal.Length))+
+  geom_boxplot()+
+  ggtitle("各品種鳶尾花花瓣長度盒鬚圖")+
+  xlab("鳶尾花品種")+ylab("花瓣長度")
 ```
 
 ###05. 長條圖
+
+*鑽石成色等級：D為最佳，J為最低*
+
+*鑽石淨度等級：從最佳至最差依序為IF>VVS1>VVS2>VS1>VS2>SI1>Sl2>I1*
+
+```{R message=FALSE,  warning=FALSE}
+#將成色排序轉向
+new_color <- factor(diamonds$color, order=TRUE,  
+                    levels=c("J","I","H","G","F","E","D"))
+#將淨度排序轉向
+new_clarity <- factor(diamonds$clarity, order=TRUE, 
+                      levels=c("I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"))
+#將新的排序指派給資料框
+diamonds$new_color <- new_color
+diamonds$new_clarity <- new_clarity
+#繪製長條圖，呈現各成色之淨度比例
+ggplot(diamonds, aes(x=new_color))+
+  geom_bar(aes(fill=new_clarity), position="fill")+coord_flip()+
+  ggtitle("鑽石各成色淨度比例")+
+  theme(legend.position="right")+
+  xlab("成色")+ylab("各淨度所占比例")
+```
+
+**Question：如何更改/隱藏圖例標題？**
