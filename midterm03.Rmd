@@ -1,0 +1,36 @@
+---
+title: "R Programming第三次期中作業"
+author: "姜佩君"
+date: "2017年1月22日"
+output: html_document
+---
+
+#主題：用ggplot2畫圖表
+
+###00. 載入ggplot2
+```{R message=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+###01. 散佈圖
+```{R message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(x=carat, y=price))+geom_point(size=0.5, colour="blue")+ggtitle("鑽石克拉數-價格散佈圖")+xlab("克拉數")+ylab("價格")+geom_smooth(method="lm", se=FALSE)
+```
+
+###02. 線圖
+
+```{R message=FALSE, warning=FALSE}
+ggplot(economics, aes(x=date, y=pop))+geom_line(colour="red")+ggtitle("Population Change during Time")+xlab("Time")+ylab("Population")
+```
+
+###03. 直方圖
+```{R message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(x=price))+geom_histogram(bins=1000) +ggtitle("鑽石價格直方圖") +xlab("價格")+ylab("frequency")
+```
+
+###04. 盒鬚圖
+```{R message=FALSE, warning=FALSE}
+ggplot(iris, aes(x=Species, y=Petal.Length))+geom_boxplot()+ggtitle("各品種鳶尾花花瓣長度盒鬚圖")+xlab("鳶尾花品種")+ylab("花瓣長度")
+```
+
+###05. 長條圖
