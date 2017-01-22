@@ -1,7 +1,5 @@
 ---
 title: "R Programming第三次期中作業"
-author: "姜佩君"
-date: "2017年1月22日"
 output: html_document
 ---
 
