@@ -39,7 +39,7 @@ ggplot(diamonds, aes(x=price))+
 ###04. 盒鬚圖
 ```{R message=FALSE, warning=FALSE}
 ggplot(iris, aes(x=Species, y=Petal.Length))+
-  geom_boxplot()+
+  geom_boxplot(fill="pink")+
   ggtitle("各品種鳶尾花花瓣長度盒鬚圖")+
   xlab("鳶尾花品種")+ylab("花瓣長度")
 ```
